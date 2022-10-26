@@ -9,21 +9,22 @@ const errorHandler = async ({ next }) => {
   }
 }
 
-class TextRewriter implements HTMLRewriterElementContentHandlers {
-  element (text: Element) {
-    text.append(htmlString, { html: true })
+class HealthPageRewriter {
+  element (span: Element) {
+    span.append(htmlString, { html: true })
   }
 }
-
-const rewriter = new HTMLRewriter()
-  .on('text', new TextRewriter())
 
 const intercept = async ({ next }) => {
   const response = await next()
   response.headers.set('X-Lennox', 'You have been modified')
 
-  // const contentType = response.headers.get('Content-Type');
+  const rewriter = new HTMLRewriter()
+    .on('span', new HealthPageRewriter())
+
   return rewriter.transform(response)
 }
 
 export const onRequest = [errorHandler, intercept]
+
+// const contentType = response.headers.get('Content-Type')
