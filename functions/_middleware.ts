@@ -19,10 +19,9 @@ const intercept = async ({ next }) => {
   const response = await next()
   response.headers.set('X-Lennox', 'You have been modified')
 
-  const rewriter = new HTMLRewriter()
+  return new HTMLRewriter()
     .on('span', new HealthPageRewriter())
-
-  return rewriter.transform(response)
+    .transform(response)
 }
 
 export const onRequest = [errorHandler, intercept]
