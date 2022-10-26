@@ -11,7 +11,7 @@ const errorHandler = async ({ next }) => {
 
 class HealthPageRewriter {
   element (span: Element) {
-    span.append(htmlString, { html: true })
+    span.setInnerContent(htmlString, { html: true })
   }
 }
 
@@ -20,7 +20,7 @@ const intercept = async ({ next }) => {
   response.headers.set('X-Lennox', 'You have been modified')
 
   return new HTMLRewriter()
-    .on('span', new HealthPageRewriter())
+    .on('#holder', new HealthPageRewriter())
     .transform(response)
 }
 
