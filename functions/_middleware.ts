@@ -37,10 +37,10 @@ class HealthPageRewriter {
 class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
   element (element: Element): void | Promise<void> {
     if (element.tagName === 'head') {
-      element.remove()
+      // element.remove()
     }
     if (element.tagName === 'html') {
-      element.removeAndKeepContent()
+      // element.removeAndKeepContent()
     }
   }
 
