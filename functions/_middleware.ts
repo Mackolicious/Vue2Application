@@ -73,8 +73,10 @@ const intercept = async ({ next }) => {
     .transform(new Response(vue3PageMarkup))
     .text()
 
+  const newMarkup = `<iframe>${vue3PageMarkupWithoutBody}</iframe>`
+
   return new HTMLRewriter()
-    .on('#holder', new HealthPageRewriter(htmlString))
+    .on('#holder', new HealthPageRewriter(newMarkup))
     .transform(response)
 }
 
