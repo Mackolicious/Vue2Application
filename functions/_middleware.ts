@@ -24,18 +24,18 @@ const errorHandler = async ({ next }) => {
 }
 
 class HealthPageRewriter {
-  _markup:string
-  constructor (markup: string) {
+  _markup: string
+  constructor(markup: string) {
     this._markup = markup
   }
 
-  element (span: Element) {
+  element(span: Element) {
     span.setInnerContent(this._markup, { html: true })
   }
 }
 
 class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
-  element (element: Element): void | Promise<void> {
+  element(element: Element): void | Promise<void> {
     if (element.tagName === 'head') {
       element.remove()
     }
@@ -44,12 +44,12 @@ class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
     }
   }
 
-  comments (comment: Comment): void | Promise<void> {
+  comments(comment: Comment): void | Promise<void> {
     // eslint-disable-next-line no-console
     console.log('comments')
   }
 
-  end (end: DocumentEnd): void | Promise<void> {
+  end(end: DocumentEnd): void | Promise<void> {
     // eslint-disable-next-line no-console
     console.log('end')
   }
@@ -70,8 +70,8 @@ const intercept = async ({ next }) => {
 
   const vue3PageMarkupWithoutBody = await new HTMLRewriter()
     .onDocument(new Vue3PageRewriter())
-    .transform(new Response(vue3PageMarkup))
-    // .text()
+    .transform(new Response(vue3PageMarkup, { headers: [['content-type', 'text/html;charset=UTF-8']] }))
+  // .text()
   return vue3PageMarkupWithoutBody
   // const newMarkup = `<iframe>${vue3PageMarkupWithoutBody}</iframe>`
 
