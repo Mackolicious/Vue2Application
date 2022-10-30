@@ -72,12 +72,12 @@ const intercept = async ({ next }) => {
     .onDocument(new Vue3PageRewriter())
     .transform(new Response(vue3PageMarkup))
     .text()
+  return vue3PageMarkupWithoutBody
+  // const newMarkup = `<iframe>${vue3PageMarkupWithoutBody}</iframe>`
 
-  const newMarkup = `<iframe>${vue3PageMarkupWithoutBody}</iframe>`
-
-  return new HTMLRewriter()
-    .on('#holder', new HealthPageRewriter(newMarkup))
-    .transform(response)
+  // return new HTMLRewriter()
+  //   .on('#holder', new HealthPageRewriter(newMarkup))
+  //   .transform(response)
 }
 
 export const onRequest = [errorHandler, intercept]
