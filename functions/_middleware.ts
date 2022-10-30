@@ -65,20 +65,20 @@ const intercept = async ({ next }) => {
 
   response.headers.set('X-Lennox', 'You have been modified')
 
-  // const vue3PageMarkupWithoutBody = await new HTMLRewriter()
-  //   .onDocument(new Vue3PageRewriter())
-  //   .transform(new Response(vue3PageMarkup, { headers: [['content-type', 'text/html;charset=UTF-8']] }))
-  //   .text()
+  const vue3PageMarkupWithoutBody = await new HTMLRewriter()
+    .on('*', new Vue3PageRewriter())
+    .transform(new Response(vue3PageMarkup, { headers: [['content-type', 'text/html;charset=UTF-8']] }))
+    .text()
   // return vue3PageMarkupWithoutBody
   // const newMarkup = `<iframe>${vue3PageMarkupWithoutBody}</iframe>`
 
-  // return new HTMLRewriter()
-  //   .on('#holder', new HealthPageRewriter(vue3PageMarkupWithoutBody))
-  //   .transform(response)
+  return new HTMLRewriter()
+    .on('#holder', new HealthPageRewriter(vue3PageMarkupWithoutBody))
+    .transform(response)
 
-  return await new HTMLRewriter()
-    .on('*', new Vue3PageRewriter())
-    .transform(response.clone())
+  // return await new HTMLRewriter()
+  //   .on('*', new Vue3PageRewriter())
+  //   .transform(response.clone())
 }
 
 export const onRequest = [errorHandler, intercept]
