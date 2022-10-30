@@ -71,7 +71,7 @@ const intercept = async ({ next }) => {
   const vue3PageMarkupWithoutBody = await new HTMLRewriter()
     .onDocument(new Vue3PageRewriter())
     .transform(new Response(vue3PageMarkup))
-    .text()
+    // .text()
   return vue3PageMarkupWithoutBody
   // const newMarkup = `<iframe>${vue3PageMarkupWithoutBody}</iframe>`
 
