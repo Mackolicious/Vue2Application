@@ -8,9 +8,16 @@
       <h2 class="subtitle">
         Welcome to the View UI + Nuxt.js template
       </h2>
+
+
+
+      
       <div>
         <span id="holder">Hola</span>
       </div>
+
+
+
       <div class="links">
         <Button type="primary" target="_blank" rel="noopener noreferrer" to="https://nuxtjs.org/">
           Documentation
