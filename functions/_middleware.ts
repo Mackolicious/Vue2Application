@@ -1,19 +1,5 @@
 const htmlString = '<marquee><h1>Lennox is great</h1></marquee>'
 
-async function gatherResponse(response) {
-  const { headers } = response
-  const contentType = headers.get('content-type') || ''
-  if (contentType.includes('application/json')) {
-    return JSON.stringify(await response.json())
-  } else if (contentType.includes('application/text')) {
-    return response.text()
-  } else if (contentType.includes('text/html')) {
-    return response.text()
-  } else {
-    return response.text()
-  }
-}
-
 // eslint-disable-next-line no-trailing-spaces
 const errorHandler = async ({ next }) => {
   try {
@@ -25,17 +11,17 @@ const errorHandler = async ({ next }) => {
 
 class HealthPageRewriter {
   _markup: string
-  constructor(markup: string) {
+  constructor (markup: string) {
     this._markup = markup
   }
 
-  element(span: Element) {
+  element (span: Element) {
     span.setInnerContent(this._markup, { html: true })
   }
 }
 
 class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
-  element(element: Element): void | Promise<void> {
+  element (element: Element): void | Promise<void> {
     if (element.tagName === 'head') {
       element.remove()
     }
@@ -44,12 +30,12 @@ class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
     }
   }
 
-  comments(comment: Comment): void | Promise<void> {
+  comments (comment: Comment): void | Promise<void> {
     // eslint-disable-next-line no-console
     console.log('comments')
   }
 
-  end(end: DocumentEnd): void | Promise<void> {
+  end (end: DocumentEnd): void | Promise<void> {
     // eslint-disable-next-line no-console
     console.log('end')
   }
@@ -68,16 +54,21 @@ const intercept = async ({ next }) => {
 
   response.headers.set('X-Lennox', 'You have been modified')
 
-  const vue3PageMarkupWithoutBody = await new HTMLRewriter()
-    .onDocument(new Vue3PageRewriter())
-    .transform(new Response(vue3PageMarkup, { headers: [['content-type', 'text/html;charset=UTF-8']] }))
-  // .text()
-  return vue3PageMarkupWithoutBody
+  // const vue3PageMarkupWithoutBody = await new HTMLRewriter()
+  //   .onDocument(new Vue3PageRewriter())
+  //   .transform(new Response(vue3PageMarkup, { headers: [['content-type', 'text/html;charset=UTF-8']] }))
+  //   .text()
+  // return vue3PageMarkupWithoutBody
   // const newMarkup = `<iframe>${vue3PageMarkupWithoutBody}</iframe>`
 
   // return new HTMLRewriter()
-  //   .on('#holder', new HealthPageRewriter(newMarkup))
+  //   .on('#holder', new HealthPageRewriter(vue3PageMarkupWithoutBody))
   //   .transform(response)
+
+    const blah = await new HTMLRewriter()
+      .onDocument(new Vue3PageRewriter())
+      .transform(response)
+  return blah
 }
 
 export const onRequest = [errorHandler, intercept]
