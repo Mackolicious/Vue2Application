@@ -20,7 +20,28 @@ class HealthPageRewriter {
   }
 }
 
-class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
+// class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
+//   element (element: Element): void | Promise<void> {
+//     if (element.tagName === 'head') {
+//       element.remove()
+//     }
+//     if (element.tagName === 'html') {
+//       element.removeAndKeepContent()
+//     }
+//   }
+
+//   comments (comment: Comment): void | Promise<void> {
+//     // eslint-disable-next-line no-console
+//     console.log('comments')
+//   }
+
+//   end (end: DocumentEnd): void | Promise<void> {
+//     // eslint-disable-next-line no-console
+//     console.log('end')
+//   }
+// }
+
+class Vue3PageRewriter {
   element (element: Element): void | Promise<void> {
     if (element.tagName === 'head') {
       element.remove()
@@ -28,16 +49,6 @@ class Vue3PageRewriter implements HTMLRewriterDocumentContentHandlers {
     if (element.tagName === 'html') {
       element.removeAndKeepContent()
     }
-  }
-
-  comments (comment: Comment): void | Promise<void> {
-    // eslint-disable-next-line no-console
-    console.log('comments')
-  }
-
-  end (end: DocumentEnd): void | Promise<void> {
-    // eslint-disable-next-line no-console
-    console.log('end')
   }
 }
 
@@ -65,10 +76,9 @@ const intercept = async ({ next }) => {
   //   .on('#holder', new HealthPageRewriter(vue3PageMarkupWithoutBody))
   //   .transform(response)
 
-    const blah = await new HTMLRewriter()
-      .onDocument(new Vue3PageRewriter())
-      .transform(response)
-  return blah
+  return await new HTMLRewriter()
+    .on('*', new Vue3PageRewriter())
+    .transform(response.clone())
 }
 
 export const onRequest = [errorHandler, intercept]
