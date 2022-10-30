@@ -74,7 +74,7 @@ const intercept = async ({ next }) => {
     .text()
 
   return new HTMLRewriter()
-    .on('#holder', new HealthPageRewriter(vue3PageMarkupWithoutBody))
+    .on('#holder', new HealthPageRewriter(htmlString))
     .transform(response)
 }
 
