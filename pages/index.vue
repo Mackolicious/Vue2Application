@@ -10,7 +10,7 @@
       </h2>
 
       <div v-if="$isServer">
-        <span id="holder">Hola</span>
+        <span id="holder">Hola: {{ oi }}</span>
       </div>
 
       <button @click="oi = !oi">{{ oi }}</button>
