@@ -9,9 +9,11 @@
         Welcome to the View UI + Nuxt.js template
       </h2>
 
-      <div v-if="$isServer">
-        <span id="holder">Hola: {{ oi }}</span>
-      </div>
+      <LazyHydrate skip>
+        <div>
+          <span id="holder">Hola: {{ oi }}</span>
+        </div>
+      </LazyHydrate>
 
       <button @click="oi = !oi">{{ oi }}</button>
 
@@ -31,12 +33,17 @@
 </template>
 
 <script>
+import LazyHydrate from 'vue-lazy-hydration'
 export default {
   name: 'IndexPage',
+  components: {
+    LazyHydrate
+  },
   data: () => {
     return { oi: true }
   }
 }
+
 </script>
 
 <style>
