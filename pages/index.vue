@@ -13,6 +13,8 @@
         <span v-once id="holder">Hola</span>
       </div>
 
+      <button @click="oi = !oi">{{ oi }}</button>
+
       <div class="links">
         <Button type="primary" target="_blank" rel="noopener noreferrer" to="https://nuxtjs.org/">
           Documentation
@@ -30,7 +32,10 @@
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  data: () => {
+    return { oi: true }
+  }
 }
 </script>
 

@@ -10269,6 +10269,11 @@
   "resolved" "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
   "version" "2.3.4"
 
+"vue-lazy-hydration@^2.0.0-beta.4":
+  "integrity" "sha512-bhr7AxzrSEPed4cOawIeCxJmR8pglberR78x1zs0886xR+47/EXE9s0Ezss90CPINo8ApzUfA/r+SbNffn+t9w=="
+  "resolved" "https://registry.npmjs.org/vue-lazy-hydration/-/vue-lazy-hydration-2.0.0-beta.4.tgz"
+  "version" "2.0.0-beta.4"
+
 "vue-loader@^15.9.7":
   "integrity" "sha512-VU6tuO8eKajrFeBzMssFUP9SvakEeeSi1BxdTH5o3+1yUyrldp8IERkSdXlMI2t4kxF2sqYUDsQY+WJBxzBmZg=="
   "resolved" "https://registry.npmjs.org/vue-loader/-/vue-loader-15.10.0.tgz"

@@ -19,6 +19,7 @@
     "nuxt": "^2.15.8",
     "view-design": "^4.7.0",
     "vue": "^2.7.10",
+    "vue-lazy-hydration": "^2.0.0-beta.4",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
   },
