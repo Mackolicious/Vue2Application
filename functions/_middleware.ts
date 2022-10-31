@@ -1,4 +1,3 @@
-/* global HTMLRewriter */
 // eslint-disable-next-line no-trailing-spaces
 const errorHandler = async ({ next }) => {
   try {
@@ -10,11 +9,11 @@ const errorHandler = async ({ next }) => {
 
 class HealthPageRewriter {
   _markup: string
-  constructor(markup: string) {
+  constructor (markup: string) {
     this._markup = markup
   }
 
-  element(element: Element) {
+  element (element: Element) {
     // const markup = '<div><marquee>Lennox is great</marquee></div>'
     // element.setInnerContent(markup, { html: true })
     element.setInnerContent(this._markup, { html: true })
@@ -22,7 +21,7 @@ class HealthPageRewriter {
 }
 
 class Vue3PageRewriter {
-  element(element: Element): void | Promise<void> {
+  element (element: Element): void | Promise<void> {
     if (element.tagName === 'head') {
       element.remove()
     }
@@ -40,7 +39,6 @@ const intercept = async ({ next }) => {
   }
 
   const response = await next()
-
 
   const vue3Page = await fetch('https://vue3application.pages.dev/', init)
   const vue3PageMarkup = await vue3Page.text()
