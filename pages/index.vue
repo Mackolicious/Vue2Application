@@ -9,7 +9,7 @@
         Welcome to the View UI + Nuxt.js template
       </h2>
 
-      <div>
+      <div v-if="$isServer">
         <span v-once id="holder">Hola</span>
       </div>
 
